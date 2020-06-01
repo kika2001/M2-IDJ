@@ -1,7 +1,7 @@
 # Sistema de Shooting
 
 ## Tipo de Arma
-### - [ ] Varios Projeteis (Explosivo,Laser,Continuo (Flamethrower like))
+### - [x] Varios Projeteis (Explosivo,Laser,Continuo (Flamethrower like))
 ### - [ ] Recoil default (nos escolhemos) (se quiser boolean)
 ### - [ ] Numero balas por clip (se quiser boolean)
 ### - [ ] Tipo de Balas (genericas ou não) (se quiser bolean)
