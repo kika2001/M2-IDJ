@@ -30,3 +30,11 @@
 #### --- EfeitoSpawnado
 #### --- Instancia algo
  #### --- Força que aplica (caso queira)
+
+# Referencias 
+## Overwatch - https://overwatch.gamepedia.com/Weapon
+## Geral - https://tvtropes.org/pmwiki/pmwiki.php/Main/StandardFPSGuns
+## Csgo - https://counterstrike.fandom.com/wiki/Category:Counter-Strike:_Global_Offensive_weapons
+## Quake - https://quake.fandom.com/wiki/Thunderbolt
+## Battlefield 1 - https://battlefield.fandom.com/wiki/Category:Weapons_of_Battlefield_1
+## Left 4 Dead 1 e 2 - https://left4dead.fandom.com/wiki/Weapons
