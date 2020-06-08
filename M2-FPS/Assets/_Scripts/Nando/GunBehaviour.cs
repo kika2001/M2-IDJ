@@ -1,54 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.UI;
 using UnityEngine.UI;
-//[CustomEditor(typeof(GunBehaviour))]
-//public class GunBehaviour_Editor : Editor
-//{
-//    public override void OnInspectorGUI()
-//    {
-//        //public LayerMask layers;
-//        //public float potencia;
-//        serializedObject.Update();
-//        GunBehaviour targetscript = (GunBehaviour)target;
 
 
-//        EditorGUILayout.LabelField("Camera GameObject", EditorStyles.boldLabel);
-//        targetscript.cam_go = (GameObject)EditorGUILayout.ObjectField(targetscript.cam_go, typeof(GameObject), true);
-//        EditorGUILayout.HelpBox("In this field you put the camera which the player is using", MessageType.Info);
-
-
-//        EditorGUILayout.LabelField("Bullet GameObject", EditorStyles.boldLabel);
-//        targetscript.bullet = (GameObject)EditorGUILayout.ObjectField(targetscript.bullet, typeof(GameObject), true);
-//        EditorGUILayout.HelpBox("In this field you put the bullet that the weapon shoots", MessageType.Info);
-
-//        EditorGUILayout.LabelField("ShotPoint", EditorStyles.boldLabel);
-//        targetscript.shotpoint = (GameObject)EditorGUILayout.ObjectField(targetscript.shotpoint, typeof(GameObject), true);
-//        EditorGUILayout.HelpBox("In this field you put the spawnpoint for the bullet", MessageType.Info);
-
-//        //EditorGUILayout.LabelField("Layers", EditorStyles.boldLabel);
-//        //targetscript.layers = EditorGUILayout.LayerField(targetscript.layers,targetscript.layers.value);
-//        //EditorGUILayout.HelpBox("In this field you put the spawnpoint for the bullet", MessageType.Info);
-
-//        EditorGUILayout.LabelField("Bullet Info", EditorStyles.boldLabel);
-//        targetscript.WantsMaxSuppBullets = EditorGUILayout.Toggle("WantsSuppBullets", targetscript.WantsMaxSuppBullets);
-
-//        if (targetscript.WantsMaxSuppBullets == true)
-//        {
-//            EditorGUILayout.LabelField("Ammo Max Supply", EditorStyles.label);
-//            targetscript.maxSuppBullets = EditorGUILayout.IntField(targetscript.maxSuppBullets);
-//            EditorGUILayout.LabelField("Ammo Current Supply", EditorStyles.label);
-//            targetscript.currentSuppBullets = EditorGUILayout.IntField(targetscript.currentSuppBullets);
-//        }
-
-//        if (GUILayout.Button("Gerar Random"))
-//        {
-//            Debug.Log("Botao Teste Premido");
-//        }
-//        serializedObject.ApplyModifiedProperties();
-//    }
-//}
 public class GunBehaviour : MonoBehaviour
 {
     public GameObject cam_go;
@@ -187,6 +142,53 @@ public class GunBehaviour : MonoBehaviour
         Debug.Log("Done Reloading");
         
     }
+    //[CustomEditor(typeof(GunBehaviour))]
+    //public class GunBehaviour_Editor : Editor
+    //{
+    //    public override void OnInspectorGUI()
+    //    {
+    //        //public LayerMask layers;
+    //        //public float potencia;
+    //        serializedObject.Update();
+    //        GunBehaviour targetscript = (GunBehaviour)target;
+
+
+    //        EditorGUILayout.LabelField("Camera GameObject", EditorStyles.boldLabel);
+    //        targetscript.cam_go = (GameObject)EditorGUILayout.ObjectField(targetscript.cam_go, typeof(GameObject), true);
+    //        EditorGUILayout.HelpBox("In this field you put the camera which the player is using", MessageType.Info);
+
+
+    //        EditorGUILayout.LabelField("Bullet GameObject", EditorStyles.boldLabel);
+    //        targetscript.bullet = (GameObject)EditorGUILayout.ObjectField(targetscript.bullet, typeof(GameObject), true);
+    //        EditorGUILayout.HelpBox("In this field you put the bullet that the weapon shoots", MessageType.Info);
+
+    //        EditorGUILayout.LabelField("ShotPoint", EditorStyles.boldLabel);
+    //        targetscript.shotpoint = (GameObject)EditorGUILayout.ObjectField(targetscript.shotpoint, typeof(GameObject), true);
+    //        EditorGUILayout.HelpBox("In this field you put the spawnpoint for the bullet", MessageType.Info);
+
+    //        //EditorGUILayout.LabelField("Layers", EditorStyles.boldLabel);
+    //        //targetscript.layers = EditorGUILayout.LayerField(targetscript.layers,targetscript.layers.value);
+    //        //EditorGUILayout.HelpBox("In this field you put the spawnpoint for the bullet", MessageType.Info);
+
+    //        EditorGUILayout.LabelField("Bullet Info", EditorStyles.boldLabel);
+    //        targetscript.WantsMaxSuppBullets = EditorGUILayout.Toggle("WantsSuppBullets", targetscript.WantsMaxSuppBullets);
+
+    //        if (targetscript.WantsMaxSuppBullets == true)
+    //        {
+    //            EditorGUILayout.LabelField("Ammo Max Supply", EditorStyles.label);
+    //            targetscript.maxSuppBullets = EditorGUILayout.IntField(targetscript.maxSuppBullets);
+    //            EditorGUILayout.LabelField("Ammo Current Supply", EditorStyles.label);
+    //            targetscript.currentSuppBullets = EditorGUILayout.IntField(targetscript.currentSuppBullets);
+    //        }
+
+    //        if (GUILayout.Button("Gerar Random"))
+    //        {
+    //            Debug.Log("Botao Teste Premido");
+    //        }
+    //        serializedObject.ApplyModifiedProperties();
+    //        DrawDefaultInspector();
+    //    }
+    //}
 
     //Primeiro antes de spawnar, tem de saber se ja existiram o maximo de balas antes (ou seja, checka a lista)
     //Caso ja exista, em vez de instaciar, ativa outravez

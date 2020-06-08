@@ -6,9 +6,7 @@ public class Projetil : MonoBehaviour
 {
     public float speed;
     public bool hasBulletHole;
-    //public GameObject bullethole;
-    //public GameObject hole_pos;
-    // Start is called before the first frame update
+    public GameObject bullethole;
     public float time = 4;
     void Start()
     {
@@ -24,9 +22,9 @@ public class Projetil : MonoBehaviour
     {
         if (collision.gameObject.tag!="Player" && hasBulletHole)
         {
-            //var direction = transform.position - collision.transform.position;
-            //var bullethole_go = Instantiate(bullethole, transform.position, Quaternion.LookRotation(direction));
-            //bullethole_go.transform.LookAt(direction);
+            var normal = collision.GetContact(0).normal;
+            var bullethole_go = Instantiate(bullethole, collision.GetContact(0).point, Quaternion.identity);
+            bullethole_go.transform.forward = normal;
             Destroy(this.gameObject);
         }
     }
