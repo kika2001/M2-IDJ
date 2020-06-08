@@ -3,14 +3,14 @@
 ## Tipo de Arma
 ### - [ ] Varios Projeteis (Explosivo,Laser,Continuo (Flamethrower like))
 ### - [ ] Recoil default (nos escolhemos) (se quiser boolean)
-### - [ ] Numero balas por clip (se quiser boolean)
+### - [X] Numero balas por clip (se quiser boolean)
 ### - [ ] Tipo de Balas (genericas ou não) (se quiser bolean)
-### - [ ] Maximo numero de balas por arma (se quiser boolean, senão infinito)
+### - [X] Maximo numero de balas por arma (se quiser boolean, senão infinito)
 ### - [ ] Numero de balas que dispara por tiro
 ### - [ ] Raio de disparo (caso nao queria, vao seguidas tipo burst)
 ### - [ ] Dano de cada bala
-### - [ ] Fire Rate
-### - [ ] Tempo que demora a carregar
+### - [X] Fire Rate
+### - [X] Tempo que demora a carregar
 ### - [ ] ArmaLevantar (se quiser boolean)
 ### - [ ] Empurra para trás (se quiser boolean)
 ### - [ ] Mira (quando tem mira posta, o recoil é quase anulado) (se quiser boolean)
@@ -19,7 +19,7 @@
 ## Balas
 ### - [ ] Dano
 ### - [ ] Velocidade
-### - [ ] Tempo de vida
+### - [X] Tempo de vida
 ### - [ ] Quanto reduz á medida do tempo
 ### - [ ] Instacia algo
 ### - [ ] Dano em area (bool)
