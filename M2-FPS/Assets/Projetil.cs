@@ -9,9 +9,15 @@ public class Projetil : MonoBehaviour
     //public GameObject bullethole;
     //public GameObject hole_pos;
     // Start is called before the first frame update
+    public float time = 4;
     void Start()
     {
-        
+        StartCoroutine(Delete(10));
+    }
+    IEnumerator Delete(float tempo)
+    {
+        yield return new WaitForSeconds(tempo);
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)

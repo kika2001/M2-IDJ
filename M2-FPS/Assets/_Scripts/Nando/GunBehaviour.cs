@@ -2,22 +2,81 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.UI;
+using UnityEngine.UI;
+//[CustomEditor(typeof(GunBehaviour))]
+//public class GunBehaviour_Editor : Editor
+//{
+//    public override void OnInspectorGUI()
+//    {
+//        //public LayerMask layers;
+//        //public float potencia;
+//        serializedObject.Update();
+//        GunBehaviour targetscript = (GunBehaviour)target;
 
+
+//        EditorGUILayout.LabelField("Camera GameObject", EditorStyles.boldLabel);
+//        targetscript.cam_go = (GameObject)EditorGUILayout.ObjectField(targetscript.cam_go, typeof(GameObject), true);
+//        EditorGUILayout.HelpBox("In this field you put the camera which the player is using", MessageType.Info);
+
+
+//        EditorGUILayout.LabelField("Bullet GameObject", EditorStyles.boldLabel);
+//        targetscript.bullet = (GameObject)EditorGUILayout.ObjectField(targetscript.bullet, typeof(GameObject), true);
+//        EditorGUILayout.HelpBox("In this field you put the bullet that the weapon shoots", MessageType.Info);
+
+//        EditorGUILayout.LabelField("ShotPoint", EditorStyles.boldLabel);
+//        targetscript.shotpoint = (GameObject)EditorGUILayout.ObjectField(targetscript.shotpoint, typeof(GameObject), true);
+//        EditorGUILayout.HelpBox("In this field you put the spawnpoint for the bullet", MessageType.Info);
+
+//        //EditorGUILayout.LabelField("Layers", EditorStyles.boldLabel);
+//        //targetscript.layers = EditorGUILayout.LayerField(targetscript.layers,targetscript.layers.value);
+//        //EditorGUILayout.HelpBox("In this field you put the spawnpoint for the bullet", MessageType.Info);
+
+//        EditorGUILayout.LabelField("Bullet Info", EditorStyles.boldLabel);
+//        targetscript.WantsMaxSuppBullets = EditorGUILayout.Toggle("WantsSuppBullets", targetscript.WantsMaxSuppBullets);
+
+//        if (targetscript.WantsMaxSuppBullets == true)
+//        {
+//            EditorGUILayout.LabelField("Ammo Max Supply", EditorStyles.label);
+//            targetscript.maxSuppBullets = EditorGUILayout.IntField(targetscript.maxSuppBullets);
+//            EditorGUILayout.LabelField("Ammo Current Supply", EditorStyles.label);
+//            targetscript.currentSuppBullets = EditorGUILayout.IntField(targetscript.currentSuppBullets);
+//        }
+
+//        if (GUILayout.Button("Gerar Random"))
+//        {
+//            Debug.Log("Botao Teste Premido");
+//        }
+//        serializedObject.ApplyModifiedProperties();
+//    }
+//}
 public class GunBehaviour : MonoBehaviour
 {
-    public Camera cam;
+    public GameObject cam_go;
+    private Camera cam;
+    
     public GameObject bullet;
     public GameObject shotpoint;
     public LayerMask layers;
+
     private bool disparar = false;
     private bool podedisparar = true;
+    private bool reloading = false;
+
     public bool WantsMaxSuppBullets;
     [HideInInspector]
     public int maxSuppBullets;
     [HideInInspector]
     public int currentSuppBullets;
+    public int maxMagazineSize;
+    public int currentMagazineBullets;
     public float potencia;
 
+    //-----------Teste/trackingShit----------------------
+    public Text ammoui_text;
+    private void Start()
+    {
+        cam = cam_go.GetComponent<Camera>();
+    }
     //public float uprecoil;
     //public float sideRecoil;
     //public float speedRecoil;
@@ -55,13 +114,25 @@ public class GunBehaviour : MonoBehaviour
         {
             disparar = false;
         }
+        if (Input.GetKeyDown(KeyCode.R) && currentMagazineBullets<maxMagazineSize)
+        {
+
+            Debug.Log("Started Reloading");
+            reloading = true;
+        }
+        //-------------Teste----------------------
+        ammoui_text.text = "Ammo:"+currentMagazineBullets.ToString()+"/"+maxMagazineSize;
 
     }
     private void FixedUpdate()
     {
-        if (disparar == true)
+        if (disparar == true && currentMagazineBullets>0)
         {
             Disparar(0.2f);
+        }
+        if (reloading==true)
+        {
+            StartCoroutine(ReloadingCouldown(3f));
         }
     }
 
@@ -102,27 +173,22 @@ public class GunBehaviour : MonoBehaviour
     {
         //Recoil();
         yield return new WaitForSeconds(tempo);
+        currentMagazineBullets--;
+        Debug.Log("Current bullets: " + currentMagazineBullets);
         podedisparar = true;
+    }
+
+    IEnumerator ReloadingCouldown(float tempo)
+    {
+        //Recoil();
+        reloading = false;
+        yield return new WaitForSeconds(tempo);
+        currentMagazineBullets = maxMagazineSize;
+        Debug.Log("Done Reloading");
+        
     }
 
     //Primeiro antes de spawnar, tem de saber se ja existiram o maximo de balas antes (ou seja, checka a lista)
     //Caso ja exista, em vez de instaciar, ativa outravez
 }
 
-[CustomEditor(typeof(GunBehaviour))]
-public class GunBehaviour_Editor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        //base.OnInspectorGUI();
-
-        GunBehaviour targetscript = (GunBehaviour)target;
-
-        targetscript.WantsMaxSuppBullets = EditorGUILayout.Toggle("Edge Pan", targetscript.WantsMaxSuppBullets);
-
-        if (targetscript.WantsMaxSuppBullets == true)
-        {
-            targetscript.maxSuppBullets = EditorGUILayout.IntField(targetscript.maxSuppBullets);
-        }
-    }
-}
