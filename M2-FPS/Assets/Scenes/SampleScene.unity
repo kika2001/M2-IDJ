@@ -554,7 +554,32 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: FireRate
-      value: 0.03
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: WantsBurstFire
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: FireRateBurst
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: AmmountBurst
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: time
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: burstTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3312412765360911987, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
