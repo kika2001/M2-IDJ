@@ -586,12 +586,12 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: maxMagazineSize
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: currentMagazineBullets
-      value: 30
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -617,12 +617,17 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: currentSuppBullets
-      value: 92
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: Ratefire
       value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: FireRate
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 3312412765360911987, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
