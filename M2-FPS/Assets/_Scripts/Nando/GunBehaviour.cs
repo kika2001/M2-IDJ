@@ -7,8 +7,12 @@ using System.Reflection;
 
 public class GunBehaviour : MonoBehaviour
 {
+    //----------------------------------------
     public GameObject cam_go;
     private Camera cam;
+    //----------------------------------------
+
+
     //----------------------------------------
     public GameObject bullet;
     public GameObject shotpoint;
@@ -96,7 +100,6 @@ public class GunBehaviour : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R) && currentMagazineBullets < maxMagazineSize && currentSuppBullets > 0)
         {
-
             Debug.Log("Started Reloading");
             reloading = true;
         }
@@ -134,7 +137,6 @@ public class GunBehaviour : MonoBehaviour
         {
             Vector3 direc = cam.transform.forward;
             direc = direc.normalized;
-            Debug.Log("Did Hit");
             Debug.Log(hit.transform.gameObject.name);
             var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(direc));
             bala.GetComponent<Rigidbody>().AddForce(direc * potencia, ForceMode.Impulse);
@@ -144,7 +146,6 @@ public class GunBehaviour : MonoBehaviour
         }
         else
         {
-            Debug.Log("Else");
             var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(cam.transform.forward));
             bala.GetComponent<Rigidbody>().AddForce(cam.transform.forward * potencia, ForceMode.Impulse);
             podedisparar = false;
