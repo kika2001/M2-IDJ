@@ -2,32 +2,56 @@
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
+using System.Reflection;
 
 public class GunBehaviour : MonoBehaviour
 {
     public GameObject cam_go;
     private Camera cam;
-    
+    //----------------------------------------
     public GameObject bullet;
     public GameObject shotpoint;
     public LayerMask layers;
+    //----------------------------------------
 
+    //----------------------------------------
     private bool disparar = false;
     private bool podedisparar = true;
     private bool reloading = false;
+    //----------------------------------------
 
+    //----------------------------------------
     public bool WantsMaxSuppBullets;
-    [HideInInspector]
+    //[HideInInspector]
     public int maxSuppBullets;
-    [HideInInspector]
+    //[HideInInspector]
     public int currentSuppBullets;
+    //----------------------------------------
     public int maxMagazineSize;
     public int currentMagazineBullets;
     public float potencia;
+    public float FireRate;
+    //----------------------------------------
+    public bool wantSpecificAmmo;
+    public AmmoType ammo;
+    //----------------------------------------
 
     //-----------Teste/trackingShit----------------------
+
     public Text ammoui_text;
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
+    public int CurrentSuppBullets
+    {
+        get { return currentSuppBullets; }
+        set { currentSuppBullets = value; }
+    }
+    public int CurrentMagazineBullets
+    {
+        get { return currentMagazineBullets; }
+        set { currentMagazineBullets = value; }
+    }
+
     private void Start()
     {
         cam = cam_go.GetComponent<Camera>();
@@ -59,6 +83,7 @@ public class GunBehaviour : MonoBehaviour
     //        }
     //    }
     //}
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     private void Update()
     {
         if (Input.GetMouseButton(0) && podedisparar)
@@ -69,28 +94,29 @@ public class GunBehaviour : MonoBehaviour
         {
             disparar = false;
         }
-        if (Input.GetKeyDown(KeyCode.R) && currentMagazineBullets<maxMagazineSize)
+        if (Input.GetKeyDown(KeyCode.R) && currentMagazineBullets < maxMagazineSize && currentSuppBullets > 0)
         {
 
             Debug.Log("Started Reloading");
             reloading = true;
         }
         //-------------Teste----------------------
-        ammoui_text.text = "Ammo:"+currentMagazineBullets.ToString()+"/"+maxMagazineSize;
+        ammoui_text.text = "Ammo:" + currentMagazineBullets.ToString() + "/" + maxMagazineSize + "\n Current SupBullets: " + currentSuppBullets;
 
     }
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     private void FixedUpdate()
     {
-        if (disparar == true && currentMagazineBullets>0)
+        if (disparar == true && currentMagazineBullets > 0)
         {
-            Disparar(0.2f);
+            Disparar(FireRate);
         }
-        if (reloading==true)
+        if (reloading == true)
         {
             StartCoroutine(ReloadingCouldown(3f));
         }
     }
-
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     //public void Recoil()
     //{
     //    Current_upRecoil = uprecoil;
@@ -98,6 +124,7 @@ public class GunBehaviour : MonoBehaviour
     //    Current_upRecoil -= speedRecoil * Time.deltaTime;
     //    Current_sideRecoil -= speedRecoil * Time.deltaTime;
     //}
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     public void Disparar(float tempo)
     {
 
@@ -123,7 +150,8 @@ public class GunBehaviour : MonoBehaviour
             podedisparar = false;
             StartCoroutine(WaitToEnableFire(tempo));
         }
-    }
+    }  
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     IEnumerator WaitToEnableFire(float tempo)
     {
         //Recoil();
@@ -132,16 +160,30 @@ public class GunBehaviour : MonoBehaviour
         Debug.Log("Current bullets: " + currentMagazineBullets);
         podedisparar = true;
     }
-
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     IEnumerator ReloadingCouldown(float tempo)
     {
         //Recoil();
         reloading = false;
         yield return new WaitForSeconds(tempo);
-        currentMagazineBullets = maxMagazineSize;
+        var sobra = maxMagazineSize - currentMagazineBullets;
+        if (currentSuppBullets >= sobra)
+        {
+            currentMagazineBullets = maxMagazineSize;
+            currentSuppBullets -= sobra;
+        }
+        else if (currentSuppBullets < sobra)
+        {
+            currentMagazineBullets += currentSuppBullets;
+            currentSuppBullets = 0;
+        }
+
         Debug.Log("Done Reloading");
-        
+
+
+
     }
+    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     //[CustomEditor(typeof(GunBehaviour))]
     //public class GunBehaviour_Editor : Editor
     //{
@@ -173,6 +215,7 @@ public class GunBehaviour : MonoBehaviour
     //        EditorGUILayout.LabelField("Bullet Info", EditorStyles.boldLabel);
     //        targetscript.WantsMaxSuppBullets = EditorGUILayout.Toggle("WantsSuppBullets", targetscript.WantsMaxSuppBullets);
 
+
     //        if (targetscript.WantsMaxSuppBullets == true)
     //        {
     //            EditorGUILayout.LabelField("Ammo Max Supply", EditorStyles.label);
@@ -181,12 +224,13 @@ public class GunBehaviour : MonoBehaviour
     //            targetscript.currentSuppBullets = EditorGUILayout.IntField(targetscript.currentSuppBullets);
     //        }
 
+
     //        if (GUILayout.Button("Gerar Random"))
     //        {
     //            Debug.Log("Botao Teste Premido");
     //        }
     //        serializedObject.ApplyModifiedProperties();
-    //        DrawDefaultInspector();
+    //        //DrawDefaultInspector();
     //    }
     //}
 

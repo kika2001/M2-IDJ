@@ -66,6 +66,7 @@
     <Compile Include="Assets\BulletHole.cs" />
     <Compile Include="Assets\Projetil.cs" />
     <Compile Include="Assets\_Scripts\MouseLook.cs" />
+    <Compile Include="Assets\_Scripts\Nando\AmmoType.cs" />
     <Compile Include="Assets\_Scripts\Nando\GunBehaviour.cs" />
     <Compile Include="Assets\_Scripts\PlayerMovement.cs" />
     <Reference Include="Unity.Timeline.Editor">
