@@ -25,8 +25,7 @@ public class GunBehaviour : MonoBehaviour
     private bool podedisparar = true;
     private bool reloading = false;
 
-    public float burstTime;
-    public float normalTime;
+    
     //----------------------------------------
 
     //----------------------------------------
@@ -41,12 +40,17 @@ public class GunBehaviour : MonoBehaviour
     public float potencia;
     public float FireRate;
     public bool WantsBurstFire;
-    public float FireRateBurst;
-    public float AmmountBurst;
+    public float burstTime;
+    public int AmmountBurst;
+
     //----------------------------------------
     public bool wantSpecificAmmo;
     public AmmoType ammo;
     //----------------------------------------
+
+    //--------------------------------
+    public bool wantsRecoil;
+
 
     //-----------Teste/trackingShit----------------------
 
@@ -66,6 +70,10 @@ public class GunBehaviour : MonoBehaviour
     private void Start()
     {
         cam = cam_go.GetComponent<Camera>();
+        if (currentMagazineBullets>maxMagazineSize)
+        {
+            currentMagazineBullets = maxMagazineSize;
+        }
     }
     //public float uprecoil;
     //public float sideRecoil;
@@ -112,9 +120,9 @@ public class GunBehaviour : MonoBehaviour
                 {
                     weapon_is_shooting = true;
                     //Couroutine de disparo burst
-                    StartCoroutine(Shoot(0.1f, 3, burst: true));
+                    StartCoroutine(Burst(burstTime, AmmountBurst, burst: true));
                     //Couroutine que faz com que nao possa disparar logo de seguida
-                    StartCoroutine(WaitToEnableFireCouldown(1f));
+                    StartCoroutine(WaitToEnableFireCouldown(FireRate));
                     
                 }
 
@@ -146,14 +154,12 @@ public class GunBehaviour : MonoBehaviour
 
 
 
-    private IEnumerator Shoot(float time, int times = 1, int currentTime = 0, bool burst = false)
+    private IEnumerator Burst(float time, int times = 1, int currentTime = 0, bool burst = false)
     {
         if (currentTime >= times)
         {
             if (burst)
-                StartCoroutine(Recoil(burstTime));
-            else
-                StartCoroutine(Recoil(normalTime));
+                StartCoroutine(Waiter(burstTime));
 
             yield break;
         }
@@ -163,10 +169,10 @@ public class GunBehaviour : MonoBehaviour
             yield break;
         yield return new WaitForSeconds(time);
 
-        StartCoroutine(Shoot(time, times, ++currentTime));
+        StartCoroutine(Burst(time, times, ++currentTime));
     }
 
-    private IEnumerator Recoil(float time)
+    private IEnumerator Waiter(float time)
     {
         yield return new WaitForSeconds(time);
     }   
@@ -213,19 +219,27 @@ public class GunBehaviour : MonoBehaviour
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     IEnumerator ReloadingCouldown(float tempo)
     {
-        reloading = false;
+        
         yield return new WaitForSeconds(tempo);
         var sobra = maxMagazineSize - currentMagazineBullets;
-        if (currentSuppBullets >= sobra)
+        if (WantsMaxSuppBullets)
+        {
+            if (currentSuppBullets >= sobra)
+            {
+                currentMagazineBullets = maxMagazineSize;
+                currentSuppBullets -= sobra;
+            }
+            else if (currentSuppBullets < sobra)
+            {
+                currentMagazineBullets += currentSuppBullets;
+                currentSuppBullets = 0;
+            }
+        }
+        else
         {
             currentMagazineBullets = maxMagazineSize;
-            currentSuppBullets -= sobra;
         }
-        else if (currentSuppBullets < sobra)
-        {
-            currentMagazineBullets += currentSuppBullets;
-            currentSuppBullets = 0;
-        }
+        reloading = false;
 
         Debug.Log("Done Reloading");
 

@@ -518,7 +518,7 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: currentMagazineBullets
-      value: 40
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -554,12 +554,12 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: FireRate
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: WantsBurstFire
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -579,7 +579,7 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: burstTime
-      value: 3
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3312412765360911987, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
