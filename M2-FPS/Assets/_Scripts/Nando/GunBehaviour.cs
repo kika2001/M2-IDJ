@@ -21,8 +21,12 @@ public class GunBehaviour : MonoBehaviour
 
     //----------------------------------------
     private bool disparar = false;
+    private bool weapon_is_shooting = false;
     private bool podedisparar = true;
     private bool reloading = false;
+
+    public float burstTime;
+    public float normalTime;
     //----------------------------------------
 
     //----------------------------------------
@@ -92,24 +96,29 @@ public class GunBehaviour : MonoBehaviour
     //}
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     private void Update()
-    {
-        if (hasCooldown)
-            return;
-
-        if (Input.GetKey(KeyCode.K))
-        {
-            hasCooldown = true;
-            StartCoroutine(Shoot(0, 1));
-        }
-        if (Input.GetKey(KeyCode.L))
-        {
-            hasCooldown = true;
-            StartCoroutine(Shoot(0.1f, 3, burst: true));
-        }
-
-        if (Input.GetMouseButton(0) && podedisparar)
+    {   
+        if (Input.GetMouseButton(0) && podedisparar && !weapon_is_shooting)
         {
             disparar = true;
+            if (currentMagazineBullets > 0)
+            {
+                if (!WantsBurstFire)
+                {
+                    weapon_is_shooting = true;
+                    Disparar(FireRate);
+                    weapon_is_shooting = false;
+                }
+                else
+                {
+                    weapon_is_shooting = true;
+                    //Couroutine de disparo burst
+                    StartCoroutine(Shoot(0.1f, 3, burst: true));
+                    //Couroutine que faz com que nao possa disparar logo de seguida
+                    StartCoroutine(WaitToEnableFireCouldown(1f));
+                    
+                }
+
+            }
         }
         else
         {
@@ -119,46 +128,10 @@ public class GunBehaviour : MonoBehaviour
         {
             Debug.Log("Started Reloading");
             reloading = true;
+            StartCoroutine(ReloadingCouldown(3f));
         }
         //-------------Teste----------------------
         ammoui_text.text = "Ammo:" + currentMagazineBullets.ToString() + "/" + maxMagazineSize + "\n Current SupBullets: " + currentSuppBullets;
-
-    }
-
-
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    private void FixedUpdate()
-    {
-        if (disparar == true && currentMagazineBullets > 0)
-        {
-            if (!WantsBurstFire)
-            {
-                Disparar(FireRate);
-            }
-            else
-            {
-
-               // StartCoroutine(Shoot(2000,3 ));
-                //for (int i = 0; i < AmmountBurst; i++)
-                //{
-                //    do
-                //    {
-                //        if (disparar == true)
-                //        {
-                //            Disparar(FireRateBurst);
-                //        }
-                //    } while (disparar == false);
-                //}
-                //disparar = false;
-                //StartCoroutine(WaitToEnableFireCouldown(FireRate));
-
-            }
-
-        }
-        if (reloading == true)
-        {
-            StartCoroutine(ReloadingCouldown(3f));
-        }
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     //public void Recoil()
@@ -171,9 +144,7 @@ public class GunBehaviour : MonoBehaviour
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-    private bool hasCooldown;
-    public float burstTime;
-    public float normalTime;
+
 
     private IEnumerator Shoot(float time, int times = 1, int currentTime = 0, bool burst = false)
     {
@@ -187,25 +158,18 @@ public class GunBehaviour : MonoBehaviour
             yield break;
         }
 
-        InstantiateBullet();
-
+        Disparar(0f);
+        if(currentMagazineBullets==0)
+            yield break;
         yield return new WaitForSeconds(time);
-    
+
         StartCoroutine(Shoot(time, times, ++currentTime));
     }
 
     private IEnumerator Recoil(float time)
     {
         yield return new WaitForSeconds(time);
-
-        hasCooldown = false;
-    }
-    private void InstantiateBullet()
-    {
-        Vector3 direc = cam.transform.forward;
-        var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(direc));
-        bala.GetComponent<Rigidbody>().AddForce(direc * potencia, ForceMode.Impulse);
-    }
+    }   
     public void Disparar(float tempo)
     {
 
@@ -234,8 +198,8 @@ public class GunBehaviour : MonoBehaviour
     IEnumerator WaitToEnableFire(float tempo)
     {
         //Recoil();
-        yield return new WaitForSeconds(tempo);
         currentMagazineBullets--;
+        yield return new WaitForSeconds(tempo);        
         Debug.Log("Current bullets: " + currentMagazineBullets);
         podedisparar = true;
     }
@@ -244,11 +208,11 @@ public class GunBehaviour : MonoBehaviour
         //Recoil();
         yield return new WaitForSeconds(tempo);
         podedisparar = true;
+        weapon_is_shooting = false;
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     IEnumerator ReloadingCouldown(float tempo)
     {
-        //Recoil();
         reloading = false;
         yield return new WaitForSeconds(tempo);
         var sobra = maxMagazineSize - currentMagazineBullets;
