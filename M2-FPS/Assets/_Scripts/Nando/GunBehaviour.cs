@@ -7,6 +7,7 @@ using System.Reflection;
 
 public class GunBehaviour : MonoBehaviour
 {
+    
     //----------------------------------------
     public GameObject cam_go;
     private Camera cam;
@@ -18,11 +19,14 @@ public class GunBehaviour : MonoBehaviour
     public GameObject shotpoint;
     public LayerMask layers;
     public string FireButton;
+    public string RealoadButton;
+    
     //----------------------------------------
     
 
     //----------------------------------------
-    private bool disparar = false;
+    [HideInInspector]
+    public bool disparar = false;
     private bool weapon_is_shooting = false;
     private bool podedisparar = true;
     private bool reloading = false;
@@ -40,6 +44,7 @@ public class GunBehaviour : MonoBehaviour
     public int maxMagazineSize;
     public int currentMagazineBullets;
     public float potencia;
+    public float dano;
     public float FireRate;
     public bool WantsBurstFire;
     public float burstTime;
@@ -52,14 +57,16 @@ public class GunBehaviour : MonoBehaviour
 
     //--------------------------------
     public bool wantsRecoil;
-    private float current_uprecoil = 0;
-    private float current_rightrecoil = 0;
+    
+    public float current_uprecoil = 0;
+    public float current_rightrecoil = 0;
+    public float max_uprecoil;
+    public float max_rightrecoil;
     public float increment_uprecoil;
     public float increment_rightrecoil;
     public float decrement_recoil;
 
     //-----------Teste/trackingShit----------------------
-
     public Text ammoui_text;
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     public int CurrentSuppBullets
@@ -81,37 +88,10 @@ public class GunBehaviour : MonoBehaviour
             currentMagazineBullets = maxMagazineSize;
         }
     }
-    //public float uprecoil;
-    //public float sideRecoil;
-    //public float speedRecoil;
-    //private float current_upRecoil;
-    //private float current_sideRecoil;
-    //public float Current_upRecoil 
-    //{
-    //    get { return current_upRecoil; }
-    //    set 
-    //    {
-    //        if (value<0)
-    //        {
-    //            current_upRecoil = 0;
-    //        }
-    //    }
-    //}
-    //public float Current_sideRecoil
-    //{
-    //    get { return current_sideRecoil; }
-    //    set
-    //    {
-    //        if (value < 0)
-    //        {
-    //            current_sideRecoil = 0;
-    //        }
-    //    }
-    //}
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     private void Update()
     {
-        if (Input.GetButton(FireButton) && podedisparar && !weapon_is_shooting)
+        if (Input.GetButton(FireButton) && podedisparar && !weapon_is_shooting && !reloading)
         {
             disparar = true;
             if (currentMagazineBullets > 0)
@@ -134,7 +114,7 @@ public class GunBehaviour : MonoBehaviour
 
             }
         }
-        else
+        else if (!Input.GetButton(FireButton))
         {
             disparar = false;
             if (wantsRecoil)
@@ -144,10 +124,11 @@ public class GunBehaviour : MonoBehaviour
                     current_rightrecoil = 0;
                 }
                 else if (current_rightrecoil > 0)
-                {
+                {                    
                     current_rightrecoil -= decrement_recoil * Time.deltaTime;
                 }
 
+                
 
                 if (current_uprecoil < 0)
                 {
@@ -155,13 +136,20 @@ public class GunBehaviour : MonoBehaviour
                 }
                 else if (current_uprecoil > 0)
                 {
+                    
                     current_uprecoil -= decrement_recoil * Time.deltaTime;
                 }
 
             }
             
         }
-        if (Input.GetKeyDown(KeyCode.R) && currentMagazineBullets < maxMagazineSize && currentSuppBullets > 0)
+
+        if (max_uprecoil < current_uprecoil)
+            current_uprecoil = max_uprecoil;
+        if (max_rightrecoil < current_rightrecoil)
+            current_rightrecoil = max_rightrecoil;
+
+        if (Input.GetKeyDown(KeyCode.R) && currentMagazineBullets < maxMagazineSize && currentSuppBullets > 0 && !disparar)
         {
             Debug.Log("Started Reloading");
             reloading = true;
@@ -171,19 +159,6 @@ public class GunBehaviour : MonoBehaviour
         ammoui_text.text = "Ammo:" + currentMagazineBullets.ToString() + "/" + maxMagazineSize + "\n Current SupBullets: " + currentSuppBullets;
 
     }
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-    //public void Recoil()
-    //{
-    //    Current_upRecoil = uprecoil;
-    //    Current_sideRecoil = sideRecoil;
-    //    Current_upRecoil -= speedRecoil * Time.deltaTime;
-    //    Current_sideRecoil -= speedRecoil * Time.deltaTime;
-    //}
-    //-----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
     private IEnumerator Burst(float time, int times = 1, int currentTime = 0, bool burst = false)
     {
         if (currentTime >= times)
@@ -238,11 +213,12 @@ public class GunBehaviour : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity, layers))
         {
             Vector3 direc = cam.transform.forward;
-            direc = direc.normalized;
             Debug.Log(hit.transform.gameObject.name);
             var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(direc));
-            bala.transform.LookAt(new Vector3(hit.point.x + current_rightrecoil, hit.point.y + current_uprecoil, hit.point.z));
+            bala.transform.LookAt(hit.point);
             bala.GetComponent<Rigidbody>().AddForce(bala.transform.forward * potencia, ForceMode.Impulse);
+            bala.GetComponent<Projetil>().dano = dano;
+           //Debug.DrawRay(bala.transform.position, bala.transform.forward, Color.red,10f);
             podedisparar = false;
             if (wantsRecoil)
                 AddRecoil();
@@ -253,7 +229,10 @@ public class GunBehaviour : MonoBehaviour
         {
             var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(cam.transform.forward));
             bala.GetComponent<Rigidbody>().AddForce(cam.transform.forward * potencia, ForceMode.Impulse);
+            bala.GetComponent<Projetil>().dano = dano;
             podedisparar = false;
+            if (wantsRecoil)
+                AddRecoil();
             StartCoroutine(WaitToEnableFire(tempo));
         }
     }
@@ -262,10 +241,9 @@ public class GunBehaviour : MonoBehaviour
     {
         current_uprecoil += increment_uprecoil;
         current_rightrecoil += increment_rightrecoil;
-
-        //----------------Delete this After---------------------------
-        increment_uprecoil = Random.Range(-0.5f, 0.5f);
-        increment_rightrecoil = Random.Range(-0.3f, 0.3f);
+        ////----------------Delete this After---------------------------
+        //increment_uprecoil = Random.Range(-0.5f, 0.5f);
+        //increment_rightrecoil = Random.Range(-0.3f, 0.3f);
     }
     //-----------------------------------------------------------------------------------------------------------------------------------------------------------
     IEnumerator WaitToEnableFire(float tempo)

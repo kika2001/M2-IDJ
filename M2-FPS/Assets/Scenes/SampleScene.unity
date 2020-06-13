@@ -513,7 +513,7 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: maxMagazineSize
-      value: 40
+      value: 99
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -554,7 +554,7 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: FireRate
-      value: 2
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -584,17 +584,17 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: increment_uprecoil
-      value: 1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: increment_rightrecoil
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: decrement_recoil
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -605,6 +605,36 @@ PrefabInstance:
         type: 3}
       propertyPath: FireButton
       value: Fire1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: max_uprecoil
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: max_rightrecoil
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: RealoadButton
+      value: Reload
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: dano
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: current_uprecoil
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: current_rightrecoil
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3312412765360911987, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -839,7 +869,7 @@ GameObject:
   - component: {fileID: 1454144321}
   - component: {fileID: 1454144320}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas Mira
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -945,7 +975,7 @@ GameObject:
   - component: {fileID: 1722153575}
   - component: {fileID: 1722153574}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas Ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
