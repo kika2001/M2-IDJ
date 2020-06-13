@@ -2,11 +2,11 @@
 
 ## Tipo de Arma
 ### - [ ] Varios Projeteis (Explosivo,Laser,Continuo (Flamethrower like))
-### - [ ] Recoil default (nos escolhemos) (se quiser boolean)
+### - [X] Recoil default (nos escolhemos) (se quiser boolean)
 ### - [X] Numero balas por clip (se quiser boolean)
 ### - [X] Tipo de Balas (genericas ou não) (se quiser bolean)
 ### - [X] Maximo numero de balas por arma (se quiser boolean, senão infinito)
-### - [ ] Numero de balas que dispara por tiro
+### - [X] Numero de balas que dispara por tiro
 ### - [ ] Raio de disparo (caso nao queria, vao seguidas tipo burst)
 ### - [ ] Dano de cada bala
 ### - [X] Fire Rate
