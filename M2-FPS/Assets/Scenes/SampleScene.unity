@@ -229,18 +229,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599838225}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.064987, y: 0.8386816, z: 0.8386816}
+  m_LocalScale: {x: 0.1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1454144323}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 65, y: -16}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &599838227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +498,7 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: WantsMaxSuppBullets
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -554,7 +554,7 @@ PrefabInstance:
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
       propertyPath: FireRate
-      value: 0.05
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -580,6 +580,31 @@ PrefabInstance:
         type: 3}
       propertyPath: burstTime
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: increment_uprecoil
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: increment_rightrecoil
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: decrement_recoil
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: wantsRecoil
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932934282004021440, guid: f99dc1f48f2ad0f4f95d0984673058c3,
+        type: 3}
+      propertyPath: FireButton
+      value: Fire1
       objectReference: {fileID: 0}
     - target: {fileID: 3312412765360911987, guid: f99dc1f48f2ad0f4f95d0984673058c3,
         type: 3}
@@ -1124,18 +1149,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051187309}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.064987, y: 0.8386816, z: 0.8386816}
+  m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1454144323}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.646883, y: 29.134047}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2051187311
 MonoBehaviour:
   m_ObjectHideFlags: 0
