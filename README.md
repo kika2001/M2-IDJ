@@ -7,18 +7,18 @@
 ### - [X] Tipo de Balas (genericas ou não) (se quiser bolean)
 ### - [X] Maximo numero de balas por arma (se quiser boolean, senão infinito)
 ### - [X] Numero de balas que dispara por tiro
-### - [ ] Raio de disparo (caso nao queria, vao seguidas tipo burst)
-### - [ ] Dano de cada bala
+### - [X] Raio de disparo (caso nao queria, vao seguidas tipo burst)
+### - [X] Dano de cada bala
 ### - [X] Fire Rate
 ### - [X] Tempo que demora a carregar
-### - [ ] ArmaLevantar (se quiser boolean)
+### - [X] ArmaLevantar (se quiser boolean)
 ### - [ ] Empurra para trás (se quiser boolean)
 ### - [ ] Mira (quando tem mira posta, o recoil é quase anulado) (se quiser boolean)
 ### - [ ] Peso Arma
 ### - [ ] Tempo de Charge  (caso queira fazer um laser ou algo do genero)
 ## Balas
-### - [ ] Dano
-### - [ ] Velocidade
+### - [X] Dano
+### - [X] Velocidade
 ### - [X] Tempo de vida
 ### - [ ] Quanto reduz á medida do tempo
 ### - [ ] Instacia algo
