@@ -20,7 +20,7 @@
 ### - [X] Dano
 ### - [X] Velocidade
 ### - [X] Tempo de vida
-### - [ ] Quanto reduz á medida do tempo
+### - [X] Quanto reduz á medida do tempo
 ### - [ ] Instacia algo
 ### - [ ] Dano em area (bool)
 #### -- if yes:
