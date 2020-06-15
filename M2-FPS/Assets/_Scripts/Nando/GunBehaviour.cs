@@ -47,8 +47,8 @@ public class GunBehaviour : MonoBehaviour
     //----------------------------------------
     public int maxMagazineSize;
     public int currentMagazineBullets;
-    public float potencia;
-    public float dano;
+    public float force;
+    public float Damage;
     public float FireRate;
     public bool WantsBurstFire;
     public float burstTime;
@@ -211,8 +211,8 @@ public class GunBehaviour : MonoBehaviour
             Debug.Log(hit.transform.gameObject.name);
             var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(direc));
             bala.transform.LookAt(hit.point);
-            bala.GetComponent<Rigidbody>().AddForce(bala.transform.forward * potencia, ForceMode.Impulse);
-            bala.GetComponent<Projetil>().dano = dano;
+            bala.GetComponent<Rigidbody>().AddForce(bala.transform.forward * force, ForceMode.Impulse);
+            bala.GetComponent<Projetil>().damage = Damage;
             //Debug.DrawRay(bala.transform.position, bala.transform.forward, Color.red,10f);
             podedisparar = false;
             if (wantsRecoil)
@@ -225,8 +225,8 @@ public class GunBehaviour : MonoBehaviour
         else
         {
             var bala = Instantiate(bullet, shotpoint.transform.position, Quaternion.EulerAngles(cam.transform.forward));
-            bala.GetComponent<Rigidbody>().AddForce(cam.transform.forward * potencia, ForceMode.Impulse);
-            bala.GetComponent<Projetil>().dano = dano;
+            bala.GetComponent<Rigidbody>().AddForce(cam.transform.forward * force, ForceMode.Impulse);
+            bala.GetComponent<Projetil>().damage = Damage;
             podedisparar = false;
             if (wantsRecoil)
                 AddRecoil();
@@ -346,8 +346,8 @@ public class GunBehaviour : MonoBehaviour
 
             targetscript.maxMagazineSize = EditorGUILayout.IntField("Max Magazine Size",targetscript.maxMagazineSize);
             targetscript.currentMagazineBullets = EditorGUILayout.IntField("Current Magazine Bullets", targetscript.currentMagazineBullets);
-            targetscript.potencia = EditorGUILayout.FloatField("ShotForce", targetscript.potencia);
-            targetscript.dano = EditorGUILayout.FloatField("Bullet Damage", targetscript.dano);
+            targetscript.force = EditorGUILayout.FloatField("ShotForce", targetscript.force);
+            targetscript.Damage = EditorGUILayout.FloatField("Bullet Damage", targetscript.Damage);
             targetscript.FireRate = EditorGUILayout.FloatField("Fire Rate", targetscript.FireRate);
 
 
